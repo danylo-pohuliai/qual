@@ -1,0 +1,21 @@
+{
+    "netSSid": "netis",
+    "netPassword": "85403950",
+    "localIP": "192.168.1.2",
+    "sendToServ": 1,
+    "writeSD": 1,
+    "stopMeasurements": 1,
+    "syncMeasurements": 0,
+    "APssid": "ESP",
+    "APpass": "",
+    "APlocalIP":"192.168.4.1",
+    "serverName": "http://192.168.1.5:5000",
+    "Vlimit": 280,
+    "Ilimit": 50
+}
+
+
+
+
+
+

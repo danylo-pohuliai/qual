@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ESP_server</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link rel="shortcut icon" href="{{ url_for('static', filename='favicon.ico') }}">
+    <script src="{{ url_for('static', filename='js/jquery.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chart.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/hammer.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/chartjs-plugin-zoom.min.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</head>
+<body>
+      <div class = "connection">
+        <h1>Підключення до ESP<span class="dots">...</span></h1>
+        <button class = "updateButton">Спробувати знову</button>
+      </div>
+      
+      
+
+
+      <div class = "settings">
+        <a name="control"></a>
+          <h1>Панель управління</h1>
+          <div style="text-align: center; display:flex;">
+            <h2 style= "margin-left: 20px; margin-right: 30px; color: #fff;">Світло   </h2>
+              <div>
+                <input type="checkbox" id="light"/>
+                <label for="light">Toggle</label>
+              </div>
+          </div>
+
+          <div style="text-align: center; display:flex;">
+            <h2 style= "margin-left: 20px; margin-right: 30px; color: #fff;">Відправка на сервер   </h2>
+              <div>
+                <input type="checkbox" id="SendToServ"/>
+                <label for="SendToServ">Toggle</label>
+                </div>
+              </div>
+  
+            <div style="text-align: center; display:flex; margin-bottom: 10px;">
+              <h2 style= "margin-left: 20px; margin-right: 30px; color: #fff;">Запис на SD карту   </h2>
+                <div>
+                <input type="checkbox" id="WriteSD"/>
+                <label for="WriteSD">Toggle</label>
+                </div>
+            </div>
+
+            <div style="text-align: center; display:flex; margin-bottom: 10px;">
+              <h2 style= "margin-left: 20px; margin-right: 30px; color: #fff;">Зупинити вимірювання   </h2>
+              <div>
+              <input type="checkbox" id="stopMeasurements"/>
+              <label for="stopMeasurements">Toggle</label>
+              </div>
+            </div>
+
+            <div style="text-align: center; display:flex; margin-bottom: 10px;">
+              <h2 style= "margin-left: 20px; margin-right: 30px; color: #fff;">Авт. синх. вимірювань   </h2>
+              <div>
+              <input type="checkbox" id="syncMeasurements"/>
+              <label for="syncMeasurements">Toggle</label>
+              </div>
+            </div>
+
+            <div style="text-align: center; display:flex; margin-bottom: 10px;">
+              <h2 style= "margin-left: 20px; margin-right: 65px; color: #fff;">Статус SD карти: </h2>
+              <h2 id="statusSD" style= "color: #fff;"></h2>
+            </div>
+
+            <div style="text-align: center; display:flex; margin-bottom: 10px;">
+              <h2 style= "margin-left: 20px; margin-right: 30px; color: #fff;">Лiмiт напруги, вольт</h2>
+              <input id="Vlimit" type="text" placeholder="Ліміт напруги" style = "margin-right: 15px; font-size:22px; border-radius: 1rem;"/>  
+            </div>
+
+            <div style="text-align: center; display:flex; margin-bottom: 10px;">
+              <h2 style= "margin-left: 20px; margin-right: 30px; color: #fff;">Лiмiт струму, ампер</h2>
+              <input id="Ilimit" type="text" placeholder="Ліміт струму" style = "margin-right: 15px; font-size:22px; border-radius: 1rem;"/>  
+            </div>
+
+            <a name="WiFi"></a>
+            <h1>Налаштування WiFi</h1>
+
+            <div style="text-align: center; display:flex; margin-bottom: 10px;">
+                <h2 style= "margin-left: 20px; margin-right: 65px; color: #fff;">SSid</h2>
+                <input id="SSid" type="text" placeholder="SSid" style="font-size:22px; border-radius: 1rem;"/> 
+            </div>
+
+            <div style="text-align: center; display:flex; margin-bottom: 10px;">
+                <h2 style= "margin-left: 20px; margin-right: 30px; color: #fff;">Пароль</h2>
+                <input id="Password" type="text" placeholder="Пароль" style = "margin-right: 15px; font-size:22px; border-radius: 1rem;"/> 
+            </div>
+            
+            <div style="text-align: center; display:flex; margin-bottom: 10px;">
+              <h2 style= "margin-left: 20px; margin-right: 30px; color: #fff;">Адреса сервера</h2>
+              <input id="serverName" type="text" placeholder="Пароль" style = "margin-right: 15px; font-size:22px; border-radius: 1rem;"/> 
+            </div>
+
+            <div style="text-align: center; display:flex; margin-bottom: 10px;">
+              <h2 style= "margin-left: 20px; margin-right: 30px; color: #fff;">IP-адреса LAN</h2>
+              <input id="LocalIP" type="text" placeholder="ІР-адреса" style = "margin-right: 15px; font-size:22px; border-radius: 1rem;"/>  
+            </div>
+
+
+            <a name="AP"></a>
+            <h1>Налаштування точки доступу</h1>
+
+            <div style="text-align: center; display:flex; margin-bottom: 10px;">
+              <h2 style= "margin-left: 20px; margin-right: 65px; color: #fff;">APSSid</h2>
+              <input id="APSSid" type="text" placeholder="APSSid" style="font-size:22px; border-radius: 1rem;"/> 
+          </div>
+
+          <div style="text-align: center; display:flex; margin-bottom: 10px;">
+              <h2 style= "margin-left: 20px; margin-right: 30px; color: #fff;">APPassword</h2>
+              <input id="APPassword" type="text" placeholder="APPassword" style = "margin-right: 15px; font-size:22px; border-radius: 1rem;"/> 
+          </div>
+
+          <div style="text-align: center; display:flex; margin-bottom: 10px;">
+            <h2 style= "margin-left: 20px; margin-right: 30px; color: #fff;">IP-адреса AP</h2>
+            <input id="APlocalIP" type="text" placeholder="ІР-адреса" style = "margin-right: 15px; font-size:22px; border-radius: 1rem;"/>  
+          </div>
+
+          <div style="text-align: center; display:flex; margin-bottom: 10px; display: flex; flex-direction: column;">
+            <button id="saveChanges" style="border-radius: 10em; height: 50px; font-size: 24px;">Відправити зміни пристрою</button>
+          </div>
+        <br>
+      </div> 
+    
+
+    
+
+
+    <a name="voltage"></a>
+    <h1>Напруга фази А</h1>
+    <br>
+    <div class="chart-wrapper">
+        <canvas id="canvasVA" > </canvas>
+        <div class="input-wrapper">
+          <h4 style = "color: #fff;">Від:</h4>
+          <input type="datetime-local" id="startDateTimeVA" />
+          <h4 style = "color: #fff;" >До:</h4>
+          <input type="datetime-local" id="endDateTimeVA" />
+          <button class="submitButton" data-circuit = "VA">Отримати дані</button>
+      </div>
+    </div>
+    <br>
+  
+    <h1>Напруга фази В</h1>
+    <br>
+    <div class="chart-wrapper">
+        <canvas id="canvasVB"> </canvas>
+        <div class="input-wrapper">
+          <h4 style = "color: #fff;">Від:</h4>
+          <input type="datetime-local" id="startDateTimeVB" />
+          <h4 style = "color: #fff;" >До:</h4>
+          <input type="datetime-local" id="endDateTimeVB" />
+          <button class="submitButton" data-circuit = "VB">Отримати дані</button>
+        </div>
+    </div>
+    <br>
+
+    <h1>Напруга фази C</h1>
+    <br>
+    <div class="chart-wrapper">
+        <canvas id="canvasVC"> </canvas>
+        <div class="input-wrapper">
+          <h4 style = "color: #fff;">Від:</h4>
+          <input type="datetime-local" id="startDateTimeVC" />
+          <h4 style = "color: #fff;" >До:</h4>
+          <input type="datetime-local" id="endDateTimeVC" />
+          <button class="submitButton" data-circuit = "VC">Отримати дані</button>
+        </div>
+    </div>
+    <br>
+
+    <a name="currency"></a>
+    <h1>Струм фази A</h1>
+    <br>
+    <div class="chart-wrapper">
+        <canvas id="canvasIA"> </canvas>
+        <div class="input-wrapper">
+          <h4 style = "color: #fff;">Від:</h4>
+          <input type="datetime-local" id="startDateTimeIA" />
+          <h4 style = "color: #fff;" >До:</h4>
+          <input type="datetime-local" id="endDateTimeIA" />
+          <button class="submitButton" data-circuit = "IA">Отримати дані</button>
+        </div>
+    </div>
+    <br>
+
+    <h1>Струм фази B</h1>
+    <br>
+    <div class="chart-wrapper">
+        <canvas id="canvasIB"> </canvas>
+        <div class="input-wrapper">
+          <h4 style = "color: #fff;">Від:</h4>
+          <input type="datetime-local" id="startDateTimeIB" />
+          <h4 style = "color: #fff;" >До:</h4>
+          <input type="datetime-local" id="endDateTimeIB" />
+          <button class="submitButton" data-circuit = "IB">Отримати дані</button>
+        </div>
+    </div>
+    <br>
+
+    <h1>Струм фази C</h1>
+    <br>
+    <div class="chart-wrapper">
+        <canvas id="canvasIC"> </canvas>
+        <div class="input-wrapper">
+          <h4 style = "color: #fff;">Від:</h4>
+          <input type="datetime-local" id="startDateTimeIC" />
+          <h4 style = "color: #fff;" >До:</h4>
+          <input type="datetime-local" id="endDateTimeIC" />
+          <button class="submitButton" data-circuit = "IC">Отримати дані</button>
+        </div>
+    </div>
+    <br>
+</body>
+
+</html>

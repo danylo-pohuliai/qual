@@ -1,0 +1,122 @@
+body {
+    padding-top: 5vh;
+    background-color: #182432;
+}
+
+
+h1 {
+    bottom: 10;
+    color: #fff;
+    font-family: cursive;
+    text-align: center;
+}
+
+input[type=checkbox] {
+    height: 0;
+    width: 0;
+    visibility: hidden;
+    z-index: -1;
+}
+
+label {
+    cursor: pointer;
+    text-indent: -9999px;
+    width: 80px;
+    height: 40px;
+    background: grey;
+    display: block;
+    border-radius: 100px;
+    position: relative;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+label:after {
+    content: '';
+    position: absolute;
+    top: 5px;
+    left: 5px;
+    width: 30px;
+    height: 30px;
+    background: #fff;
+    border-radius: 90px;
+    transition: 0.3s;
+}
+
+input:checked+label {
+    background: #bada55;
+}
+
+input:checked+label:after {
+    left: calc(100% - 5px);
+    transform: translateX(-100%);
+}
+
+label:active:after {
+    width: 50px;
+}
+
+.content {
+    padding: 5px;
+}
+
+
+.chart-wrapper {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+    height: 400px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-bottom: 20px;
+}
+
+.input-wrapper {
+    display: flex;
+    align-items: center;
+    gap: 10px; 
+}
+
+.submitButton {
+    background-color: #216fc2; 
+    color: #fff; 
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px; 
+    width: 30%; 
+    box-sizing: border-box; 
+}
+
+.settings {
+    display: none;
+}
+
+.connection {
+    display: flex;
+    flex-direction: column; 
+    justify-content: center; 
+    align-items: center;
+}
+
+.updateButton {
+    display:none;
+    background-color: #216fc2; 
+    color: #fff; 
+    border: none;
+    padding: 10px 20px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    border-radius: 12px; 
+    width: 30%; 
+    box-sizing: border-box; 
+}
