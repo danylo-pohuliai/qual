@@ -1,6 +1,6 @@
 {
-    "netSSid": "netis",
-    "netPassword": "85403950",
+    "netSSid": "",
+    "netPassword": "",
     "localIP": "192.168.1.2",
     "sendToServ": 1,
     "writeSD": 1,
